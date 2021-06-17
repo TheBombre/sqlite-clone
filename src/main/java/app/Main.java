@@ -1,14 +1,31 @@
 package app;
 
+import java.util.Scanner;
+
 public class Main
 {
-    public String getGreeting()
+    // TODO: Print out starting text
+    public void printStartingText()
     {
-        return "Hello World!";
+        System.out.println("Sqlite clone");
     }
+
 
     public static void main(String[] args)
     {
-        System.out.println(new Main().getGreeting());
+        Main main = new Main();
+        Scanner inputReader = new Scanner(System.in);
+        main.printStartingText();
+
+        while(true) {
+            System.out.print("db > ");
+            String command = inputReader.nextLine();
+
+            if(command.equals(".exit")) {
+                System.exit(0);
+            } else {
+                System.out.println("Unrecognised command " + command);
+            }
+        }
     }
 }

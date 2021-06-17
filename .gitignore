@@ -26,3 +26,8 @@ hs_err_pid*
 .gradle
 build
 .DS_Store
+
+# Ignore Eclipse project files
+.classpath
+.project
+.settings
