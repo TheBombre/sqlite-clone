@@ -20,6 +20,16 @@ public class Table
     }
 
     /**
+     * Print all rows in table
+     * */
+    public void printRows()
+    {
+        for(int i = 0; i < numberOfPages; i++) {
+            pages[i].printRows();
+        }
+    }
+
+    /**
      * Creates a page object and adds the row to it
      * @param row to add to created page
      * @return created page
@@ -42,17 +52,17 @@ public class Table
             pages[numberOfRows] = createPageWithRow(row);
             numberOfRows++;
             numberOfPages++;
-        } else if(pages[numberOfRows - 1].canTakeRow())
+        } else if(pages[numberOfPages - 1].canTakeRow())
         {
-            pages[numberOfRows - 1].add(row);
+            pages[numberOfPages - 1].add(row);
             numberOfRows++;
         } else
         {
             if(numberOfPages + 1 > MAX_PAGES) {
-                throw new IndexOutOfBoundsException("Table is full.");
+                throw new IndexOutOfBoundsException("Error: Table is full.");
             }
 
-            pages[numberOfRows] = createPageWithRow(row);
+            pages[numberOfPages] = createPageWithRow(row);
             numberOfRows++;
             numberOfPages++;
         }

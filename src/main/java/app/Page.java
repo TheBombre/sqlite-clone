@@ -2,7 +2,7 @@ package app;
 
 public class Page
 {
-    public static final int SIZE = 4096; // 4 kilobytes
+    public static final int SIZE = 16 * 1024; // 16 kilobytes
     public static final int MAX_ROWS = SIZE / Row.SIZE;
     private Row[] rows;
     private int numberOfRows;
@@ -14,7 +14,16 @@ public class Page
     {
         rows = new Row[MAX_ROWS];
         numberOfRows = 0;
-        System.out.println("MAX_ROWS: " + MAX_ROWS);
+    }
+
+    /**
+     * Print all rows on page
+     * */
+    public void printRows()
+    {
+        for(int i = 0; i < numberOfRows; i++) {
+            System.out.println(rows[i]);
+        }
     }
 
     /**
@@ -25,7 +34,7 @@ public class Page
     public void add(Row row) throws IndexOutOfBoundsException {
         if(!canTakeRow())
         {
-            throw new IndexOutOfBoundsException("Page doesn't have enough space to store additional row.");
+            throw new IndexOutOfBoundsException("Error: Page doesn't have enough space to store additional row.");
         }
 
         rows[numberOfRows] = row;
@@ -38,6 +47,6 @@ public class Page
      * */
     public boolean canTakeRow()
     {
-        return numberOfRows + 1 < MAX_ROWS;
+        return numberOfRows + 1 <= MAX_ROWS;
     }
 }

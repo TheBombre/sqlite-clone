@@ -4,9 +4,9 @@ public class Row
 {
     public static final int USERNAME_SIZE = 32;
     public static final int EMAIL_SIZE = 255;
-    public static final int SIZE = (Character.SIZE * (USERNAME_SIZE + EMAIL_SIZE)) + Long.SIZE;
+    public static final int SIZE = (Character.SIZE * (USERNAME_SIZE + EMAIL_SIZE)) + Integer.SIZE;
 
-    private long id;
+    private int id;
     private char[] email;
     private char[] username;
 
@@ -17,11 +17,14 @@ public class Row
      * @param email
      * @throws IllegalArgumentException
      * */
-    public Row(long id, String username, String email) throws IllegalArgumentException {
+    public Row(int id, String username, String email) throws IllegalArgumentException {
         if(username.length() > USERNAME_SIZE || email.length() > EMAIL_SIZE)
         {
-            throw new IllegalArgumentException("Please ensure that username size is " + USERNAME_SIZE + " and email size is " + EMAIL_SIZE);
+            throw new IllegalArgumentException("Error: Please ensure that username size is " + USERNAME_SIZE + " and email size is " + EMAIL_SIZE);
         }
+
+        if(id < 0)
+            throw new IllegalArgumentException("Error: id value can only be a positive value.");
 
         this.id = id;
         this.username = username.toCharArray();
@@ -61,6 +64,6 @@ public class Row
     @Override
     public String toString()
     {
-        return "id: " + id + ", email: " + email + ", username: " + username + ".";
+        return "(" + id + ", " + String.valueOf(username) + ", " + String.valueOf(email) + ")";
     }
 }
